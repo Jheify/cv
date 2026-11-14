@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jheify Jafeth Quijano Ruiz - Portafolio Interactivo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- ENCABEZADO CENTRADO Y LIMPIO -->
+        <header id="header-card" onclick="efectoPulso()">
+            <div class="header-center">
+                <h1>Jheify Jafeth Quijano Ruiz</h1>
+                <p class="subtitle">Técnico Medio en Informática | Desarrollo de Software</p>
+                
+                <div class="contact-bar-centered">
+                    <!-- Ubicación -->
+                    <div class="contact-clickable">
+                        <a href="https://www.google.com/maps/place/Barva,+Heredia+Province,+Costa+Rica" target="_blank" onclick="event.stopPropagation()" title="Ver ubicación en Google Maps">
+                            📍 Barva, Heredia, Costa Rica
+                        </a>
+                    </div>
+                    
+                    <!-- Teléfono -->
+                    <div class="contact-clickable" onclick="copiarTelefonoDirecto(event)" title="¡Haz clic para copiar el número!">
+                        📞 <span id="phone-text">6359-6515</span>
+                    </div>
+
+                    <!-- Correo -->
+                    <div class="contact-clickable">
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Jheyfi2000@gmail.com" target="_blank" onclick="event.stopPropagation()" title="Enviar correo mediante Gmail">✉️ Jheyfi2000@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- MENÚ DE VIÑETAS (PESTAÑAS INTERACTIVAS) -->
+        <nav class="tabs-nav">
+            <button class="tab-btn active" onclick="abrirPestana(event, 'perfil')">👤 Perfil Profesional</button>
+            <button class="tab-btn" onclick="abrirPestana(event, 'experiencia')">💼 Experiencia y Prácticas</button>
+            <button class="tab-btn" onclick="abrirPestana(event, 'educacion')">🎓 Formación Académica</button>
+            <button class="tab-btn" onclick="abrirPestana(event, 'habilidades')">⚡ Habilidades y Competencias</button>
+        </nav>
+
+        <!-- CONTENEDOR DE SECCIONES DINÁMICAS -->
+        <main>
+            <!-- PESTAÑA 1: PERFIL PROFESIONAL -->
+            <section id="perfil" class="tab-content active">
+                <h2>Perfil Profesional</h2>
+                <div class="interactive-box" onclick="resaltarTexto(this)">
+                    <p>
+                        Técnico Medio en Informática con especialidad en Desarrollo de Software, con formación técnica y conocimientos de computación, Microsoft Office y herramientas digitales. Cuenta con experiencia laboral en vigilancia, monitoreo de cámaras de seguridad, atención al cliente y manejo de caja. Se caracteriza por su atención al detalle, trabajo en equipo, responsabilidad y disposición para aprender y desarrollarse profesionalmente en el área de tecnología.
+                    </p>
+                    <span class="mini-tip">💡 Haz clic en el recuadro para destacar</span>
+                </div>
+            </section>
+
+            <!-- PESTAÑA 2: EXPERIENCIA Y PRÁCTICAS -->
+            <section id="experiencia" class="tab-content">
+                <h2>Experiencia Laboral y Prácticas</h2>
+                
+                <div class="timeline-item">
+                    <div class="dot active-dot"></div>
+                    <h3>Cajero y apoyo en mantenimiento de agujas de acceso</h3>
+                    <span class="fecha">Plaza Heredia | 15 de octubre de 2025 – Presente</span>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="dot"></div>
+                    <h3>Oficial de seguridad</h3>
+                    <span class="fecha">Goliat | Febrero de 2023 – Inicios de octubre de 2025</span>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="dot"></div>
+                    <h3>Pasantía Escolar en Desarrollo de Software</h3>
+                    <span class="fecha">Betatech | Septiembre – Diciembre (3 meses)</span>
+                </div>
+            </section>
+
+            <!-- PESTAÑA 3: FORMACIÓN ACADÉMICA -->
+            <section id="educacion" class="tab-content">
+                <h2>Formación Académica</h2>
+                
+                <div class="edu-card">
+                    <h3>Técnico Medio en Informática – Desarrollo de Software</h3>
+                    <span class="fecha">IPEC de Santo Domingo de Heredia</span>
+                    <p class="status-ok">✔ Título aprobado y certificación obtenida.</p>
+                </div>
+
+                <div class="edu-card">
+                    <h3>Bachillerato en Educación Media</h3>
+                    <span class="fecha">Liceo de Santo Domingo de Heredia</span>
+                    <p class="status-ok">✔ Completado</p>
+                </div>
+            </section>
+
+            <!-- PESTAÑA 4: HABILIDADES Y COMPETENCIAS -->
+            <section id="habilidades" class="tab-content">
+                <h2>Habilidades y Competencias</h2>
+                <p class="hint-text">Toca cada habilidad para marcar tus favoritas o explorar:</p>
+                <ul class="skills-grid">
+                    <li onclick="toggleSkill(this)">💻 Desarrollo de Software</li>
+                    <li onclick="toggleSkill(this)">📊 Microsoft Office</li>
+                    <li onclick="toggleSkill(this)">🤝 Ventas y Servicio al Cliente</li>
+                    <li onclick="toggleSkill(this)">🚀 Trabajo en Equipo</li>
+                    <li onclick="toggleSkill(this)">🔍 Atención al Detalle</li>
+                    <li onclick="toggleSkill(this)">🧠 Responsabilidad y Aprendizaje</li>
+                </ul>
+            </section>
+        </main>
+
+        <!-- PIE DE PÁGINA -->
+        <footer>
+            <p>Jheify Jafeth Quijano Ruiz &copy; 2026</p>
+        </footer>
+    </div>
+
+    <!-- LÓGICA DE INTERACTIVIDAD (JAVASCRIPT) -->
+    <script>
+        function abrirPestana(evt, nombrePestana) {
+            const contenidos = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contenidos.length; i++) {
+                contenidos[i].classList.remove("active");
+            }
+
+            const botones = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < botones.length; i++) {
+                botones[i].classList.remove("active");
+            }
+
+            document.getElementById(nombrePestana).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        function efectoPulso() {
+            const header = document.getElementById("header-card");
+            header.classList.add("pulse-effect");
+            setTimeout(() => {
+                header.classList.remove("pulse-effect");
+            }, 400);
+        }
+
+        function copiarTelefonoDirecto(event) {
+            event.stopPropagation();
+            navigator.clipboard.writeText("6359-6515");
+            const elemento = document.getElementById("phone-text");
+            const textoOriginal = elemento.innerText;
+            elemento.innerText = "¡Copiado! ✅";
+            elemento.style.color = "var(--accent-red)";
+            
+            setTimeout(() => {
+                elemento.innerText = textoOriginal;
+                elemento.style.color = "";
+            }, 2000);
+        }
+
+        function resaltarTexto(elemento) {
+            elemento.classList.toggle("highlighted");
+        }
+
+        function toggleSkill(elemento) {
+            elemento.classList.toggle("skill-selected");
+        }
+    </script>
+</body>
+</html>
