@@ -9,10 +9,13 @@
 <body>
 
     <div class="container">
-        <!-- ENCABEZADO CENTRADO Y LIMPIO -->
-        <header id="header-card" onclick="efectoPulso()">
+        <!-- ENCABEZADO CON NOMBRE INTERACTIVO -->
+        <header id="header-card">
             <div class="header-center">
-                <h1>Jheify Jafeth Quijano Ruiz</h1>
+                <!-- Al hacer clic en tu nombre, se abre automáticamente el perfil profesional -->
+                <h1 onclick="mostrarPerfilDirecto()" style="cursor: pointer;" title="Haz clic para ver mi perfil profesional">
+                    Jheify Jafeth Quijano Ruiz
+                </h1>
                 <p class="subtitle">Técnico Medio en Informática | Desarrollo de Software</p>
                 
                 <div class="contact-bar-centered">
@@ -36,17 +39,16 @@
             </div>
         </header>
 
-        <!-- MENÚ DE VIÑETAS (PESTAÑAS INTERACTIVAS) -->
+        <!-- MENÚ DE VIÑETAS (SIN LA PESTAÑA DE PERFIL) -->
         <nav class="tabs-nav">
-            <button class="tab-btn active" onclick="abrirPestana(event, 'perfil')">👤 Perfil Profesional</button>
-            <button class="tab-btn" onclick="abrirPestana(event, 'experiencia')">💼 Experiencia y Prácticas</button>
+            <button class="tab-btn active" onclick="abrirPestana(event, 'experiencia')">💼 Experiencia y Prácticas</button>
             <button class="tab-btn" onclick="abrirPestana(event, 'educacion')">🎓 Formación Académica</button>
             <button class="tab-btn" onclick="abrirPestana(event, 'habilidades')">⚡ Habilidades y Competencias</button>
         </nav>
 
         <!-- CONTENEDOR DE SECCIONES DINÁMICAS -->
         <main>
-            <!-- PESTAÑA 1: PERFIL PROFESIONAL -->
+            <!-- SECCIÓN 1: PERFIL PROFESIONAL (Activa por defecto al hacer clic en tu nombre) -->
             <section id="perfil" class="tab-content active">
                 <h2>Perfil Profesional</h2>
                 <div class="interactive-box" onclick="resaltarTexto(this)">
@@ -57,7 +59,7 @@
                 </div>
             </section>
 
-            <!-- PESTAÑA 2: EXPERIENCIA Y PRÁCTICAS -->
+            <!-- SECCIÓN 2: EXPERIENCIA Y PRÁCTICAS -->
             <section id="experiencia" class="tab-content">
                 <h2>Experiencia Laboral y Prácticas</h2>
                 
@@ -76,11 +78,11 @@
                 <div class="timeline-item">
                     <div class="dot"></div>
                     <h3>Pasantía Escolar en Desarrollo de Software</h3>
-                    <span class="fecha">Betatech | Septiembre – Diciembre del 2022 (3 meses)</span>
+                    <span class="fecha">Betatech | Septiembre – Diciembre (3 meses)</span>
                 </div>
             </section>
 
-            <!-- PESTAÑA 3: FORMACIÓN ACADÉMICA -->
+            <!-- SECCIÓN 3: FORMACIÓN ACADÉMICA -->
             <section id="educacion" class="tab-content">
                 <h2>Formación Académica</h2>
                 
@@ -95,14 +97,9 @@
                     <span class="fecha">Liceo de Santo Domingo de Heredia</span>
                     <p class="status-ok">✔ Completado</p>
                 </div>
-                <div class="edu-card">
-                    <h3>Ingles nivel 2</h3>
-                    <span class="fecha">Ipec Santo Domingo de Heredia</span>
-                    <p class="status-ok">✔ certificación obtenida</p>
-                </div>
             </section>
 
-            <!-- PESTAÑA 4: HABILIDADES Y COMPETENCIAS -->
+            <!-- SECCIÓN 4: HABILIDADES Y COMPETENCIAS -->
             <section id="habilidades" class="tab-content">
                 <h2>Habilidades y Competencias</h2>
                 <p class="hint-text">Toca cada habilidad para marcar tus favoritas o explorar:</p>
@@ -137,15 +134,27 @@
             }
 
             document.getElementById(nombrePestana).classList.add("active");
-            evt.currentTarget.classList.add("active");
+            
+            // Si el evento viene de un botón del menú, activa el botón correspondiente
+            if (evt && evt.currentTarget && evt.currentTarget.classList.contains("tab-btn")) {
+                evt.currentTarget.classList.add("active");
+            }
         }
 
-        function efectoPulso() {
-            const header = document.getElementById("header-card");
-            header.classList.add("pulse-effect");
-            setTimeout(() => {
-                header.classList.remove("pulse-effect");
-            }, 400);
+        // Función específica para mostrar el perfil profesional al hacer clic en el nombre
+        function mostrarPerfilDirecto() {
+            const contenidos = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contenidos.length; i++) {
+                contenidos[i].classList.remove("active");
+            }
+
+            const botones = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < botones.length; i++) {
+                botones[i].classList.remove("active");
+            }
+
+            // Muestra la sección de perfil
+            document.getElementById("perfil").classList.add("active");
         }
 
         function copiarTelefonoDirecto(event) {
